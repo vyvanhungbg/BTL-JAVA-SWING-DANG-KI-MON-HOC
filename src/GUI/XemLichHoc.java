@@ -187,13 +187,23 @@ public class XemLichHoc extends javax.swing.JFrame {
 
         txt_MSV.setEnabled(false);
 
-        menu_trangChu.setText("Trang chu");
+        menu_trangChu.setText("Trang chủ");
+        menu_trangChu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_trangChuMouseClicked(evt);
+            }
+        });
+        menu_trangChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_trangChuActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(menu_trangChu);
 
         menu_xem.setText("Xem");
         menu_xem.setToolTipText("");
 
-        menu_xemTKB.setText("Xem thoi khoa bieu");
+        menu_xemTKB.setText("Thời khóa biểu");
         menu_xemTKB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_xemTKBActionPerformed(evt);
@@ -206,7 +216,7 @@ public class XemLichHoc extends javax.swing.JFrame {
         menu_dangKy.setText("Đăng kí");
         menu_dangKy.setActionCommand("");
 
-        menu_dangKiHP.setText("Dang ki hoc phan");
+        menu_dangKiHP.setText("Đăng kí học phần");
         menu_dangKiHP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_dangKiHPActionPerformed(evt);
@@ -216,16 +226,16 @@ public class XemLichHoc extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_dangKy);
 
-        menu_hoTro.setText("Ho tro");
+        menu_hoTro.setText("Hỗ trợ");
 
-        menu_rutDangKiHP.setText("Rut dang ki hoc phan");
+        menu_rutDangKiHP.setText("Rút đăng kí học phần");
         menu_hoTro.add(menu_rutDangKiHP);
 
         jMenuBar1.add(menu_hoTro);
 
         menu_thoat.setText("Thoát");
 
-        menu_dangXuat.setText("Dang xuat");
+        menu_dangXuat.setText("Đăng xuất");
         menu_dangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_dangXuatActionPerformed(evt);
@@ -233,7 +243,7 @@ public class XemLichHoc extends javax.swing.JFrame {
         });
         menu_thoat.add(menu_dangXuat);
 
-        menu_Thoat.setText("Thoat");
+        menu_Thoat.setText("Thoát");
         menu_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_ThoatActionPerformed(evt);
@@ -323,6 +333,11 @@ public class XemLichHoc extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonQLActionPerformed
 
+    private void menu_trangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_trangChuActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_trangChuActionPerformed
+
     private void menu_xemTKBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_xemTKBActionPerformed
         // TODO add your handling code here:
         XemLichHoc xemlh=new XemLichHoc(maSV);
@@ -348,6 +363,14 @@ public class XemLichHoc extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_menu_ThoatActionPerformed
+
+    private void menu_trangChuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_trangChuMouseClicked
+        // TODO add your handling code here:
+         MeNuSinhVien menusv=new MeNuSinhVien(maSV);
+            //menusv.setMaSV();
+            menusv.setVisible(true);
+            dispose();
+    }//GEN-LAST:event_menu_trangChuMouseClicked
 
     /**
      * @param args the command line arguments

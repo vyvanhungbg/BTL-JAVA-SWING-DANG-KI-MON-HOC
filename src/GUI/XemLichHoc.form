@@ -6,8 +6,12 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menu_trangChu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Trang chu"/>
+            <Property name="text" type="java.lang.String" value="Trang ch&#x1ee7;"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu_trangChuMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_trangChuActionPerformed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_xem">
           <Properties>
@@ -17,7 +21,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_xemTKB">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Xem thoi khoa bieu"/>
+                <Property name="text" type="java.lang.String" value="Th&#x1edd;i kh&#xf3;a bi&#x1ec3;u"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_xemTKBActionPerformed"/>
@@ -33,7 +37,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_dangKiHP">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Dang ki hoc phan"/>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng k&#xed; h&#x1ecd;c ph&#x1ea7;n"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_dangKiHPActionPerformed"/>
@@ -43,12 +47,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_hoTro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ho tro"/>
+            <Property name="text" type="java.lang.String" value="H&#x1ed7; tr&#x1ee3;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_rutDangKiHP">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Rut dang ki hoc phan"/>
+                <Property name="text" type="java.lang.String" value="R&#xfa;t &#x111;&#x103;ng k&#xed; h&#x1ecd;c ph&#x1ea7;n"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -60,7 +64,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_dangXuat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Dang xuat"/>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_dangXuatActionPerformed"/>
@@ -68,7 +72,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menu_Thoat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Thoat"/>
+                <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_ThoatActionPerformed"/>

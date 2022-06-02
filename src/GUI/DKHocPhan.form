@@ -6,8 +6,12 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menu_trangChu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Trang chu"/>
+            <Property name="text" type="java.lang.String" value="Trang ch&#x1ee7;"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu_trangChuMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_trangChuActionPerformed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_xem">
           <Properties>
@@ -17,7 +21,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_xemTKB">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Xem thoi khoa bieu"/>
+                <Property name="text" type="java.lang.String" value="Th&#x1edd;i kh&#xf3;a bi&#x1ec3;u"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_xemTKBActionPerformed"/>
@@ -33,7 +37,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_dangKiHP">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Dang ki hoc phan"/>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng k&#xed; h&#x1ecd;c ph&#x1ea7;n"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_dangKiHPActionPerformed"/>
@@ -43,12 +47,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_hoTro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ho tro"/>
+            <Property name="text" type="java.lang.String" value="H&#x1ed7; tr&#x1ee3;"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_rutDangKiHP">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Rut dang ki hoc phan"/>
+                <Property name="text" type="java.lang.String" value="R&#xfa;t &#x111;&#x103;ng k&#xed; h&#x1ecd;c ph&#x1ea7;n"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -60,7 +64,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_dangXuat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Dang xuat"/>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng xu&#x1ea5;t"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_dangXuatActionPerformed"/>
@@ -68,7 +72,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menu_Thoat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Thoat"/>
+                <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_ThoatActionPerformed"/>
@@ -103,28 +107,31 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="24" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jButtonDK" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jButtonLM" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel2" max="32767" attributes="0"/>
-                          <Component id="jTextTK" min="-2" pref="159" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonTK" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jScrollPane1" min="-2" pref="813" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btn_dangKyHoc" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="btn_LamMoi" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel2" max="32767" attributes="0"/>
+                                  <Component id="txt_timKiem" min="-2" pref="159" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_timKiem" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" min="-2" pref="813" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -139,10 +146,10 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonDK" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonTK" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextTK" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonLM" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_dangKyHoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_timKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txt_timKiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_LamMoi" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
@@ -179,20 +186,20 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonDK">
+    <Component class="javax.swing.JButton" name="btn_dangKyHoc">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng K&#xfd; H&#x1ecd;c"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDKActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_dangKyHocActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonTK">
+    <Component class="javax.swing.JButton" name="btn_timKiem">
       <Properties>
         <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTKActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_timKiemActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -200,14 +207,14 @@
         <Property name="text" type="java.lang.String" value=" T&#xcc;m Ki&#x1ebf;m Theo T&#xea;n H&#x1ecd;c Ph&#x1ea7;n"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextTK">
+    <Component class="javax.swing.JTextField" name="txt_timKiem">
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonLM">
+    <Component class="javax.swing.JButton" name="btn_LamMoi">
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#xe0;m M&#x1edb;i"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLMActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_LamMoiActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

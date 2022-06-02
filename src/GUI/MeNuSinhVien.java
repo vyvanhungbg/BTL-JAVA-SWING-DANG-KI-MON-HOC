@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class MeNuSinhVien extends javax.swing.JFrame {
     private String maSV;
+    private SinhVien sinhVien;
     ArrayList<SinhVien> dsSV=new ArrayList<>(); // ds luu tru sinh vien 
     static final String fileNameDSSV="SinhVien.txt";
     DBEngine DBE=new DBEngine();
@@ -45,6 +46,12 @@ public class MeNuSinhVien extends javax.swing.JFrame {
             for(SinhVien it:dsSV){
                 if(it.getMaSinhVien().equalsIgnoreCase(maSV)){
                     lb_xinChao.setText("Xin Chào Sinh Viên: "+ it.getHoTen());
+                    this.sinhVien = it;
+                    txt_home_maSV.setText(maSV);
+                    txt_home_tenSV.setText(it.getHoTen());
+                    txt_home_ngaySinh.setText(it.getNgaySinh());
+                    txt_home_diaChi.setText(it.getDiaChi());
+                    txt_home_heDaoTao.setText(it.getHeDaoTao());
                     break;
                 }
             }
@@ -83,6 +90,18 @@ public class MeNuSinhVien extends javax.swing.JFrame {
     private void initComponents() {
 
         lb_xinChao = new javax.swing.JLabel();
+        lb_home_mSV = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_home_maSV = new javax.swing.JTextField();
+        txt_home_tenSV = new javax.swing.JTextField();
+        txt_home_ngaySinh = new javax.swing.JTextField();
+        txt_home_diaChi = new javax.swing.JTextField();
+        cbb_home_gioiTinh = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        txt_home_heDaoTao = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_trangChu = new javax.swing.JMenu();
         menu_xem = new javax.swing.JMenu();
@@ -100,13 +119,58 @@ public class MeNuSinhVien extends javax.swing.JFrame {
         lb_xinChao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lb_xinChao.setText("Xin Chào Sinh Viên");
 
-        menu_trangChu.setText("Trang chu");
+        lb_home_mSV.setText("Mã sinh viên");
+
+        jLabel2.setText("Tên sinh viên");
+
+        jLabel3.setText("Ngày sinh");
+
+        jLabel4.setText("Giới tính");
+
+        jLabel5.setText("Địa chỉ");
+
+        txt_home_maSV.setEnabled(false);
+        txt_home_maSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_home_maSVActionPerformed(evt);
+            }
+        });
+
+        txt_home_tenSV.setEnabled(false);
+        txt_home_tenSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_home_tenSVActionPerformed(evt);
+            }
+        });
+
+        txt_home_ngaySinh.setEnabled(false);
+
+        txt_home_diaChi.setEnabled(false);
+        txt_home_diaChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_home_diaChiActionPerformed(evt);
+            }
+        });
+
+        cbb_home_gioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nu" }));
+        cbb_home_gioiTinh.setEnabled(false);
+
+        jLabel1.setText("Hệ đào tạo");
+
+        txt_home_heDaoTao.setEnabled(false);
+
+        menu_trangChu.setText("Trang chủ");
+        menu_trangChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_trangChuActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(menu_trangChu);
 
         menu_xem.setText("Xem");
         menu_xem.setToolTipText("");
 
-        menu_xemTKB.setText("Xem thoi khoa bieu");
+        menu_xemTKB.setText("Thời khóa biểu");
         menu_xemTKB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_xemTKBActionPerformed(evt);
@@ -119,7 +183,7 @@ public class MeNuSinhVien extends javax.swing.JFrame {
         menu_dangKy.setText("Đăng kí");
         menu_dangKy.setActionCommand("");
 
-        menu_dangKiHP.setText("Dang ki hoc phan");
+        menu_dangKiHP.setText("Đăng kí học phần");
         menu_dangKiHP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_dangKiHPActionPerformed(evt);
@@ -129,16 +193,16 @@ public class MeNuSinhVien extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_dangKy);
 
-        menu_hoTro.setText("Ho tro");
+        menu_hoTro.setText("Hỗ trợ");
 
-        menu_rutDangKiHP.setText("Rut dang ki hoc phan");
+        menu_rutDangKiHP.setText("Rút đăng kí học phần");
         menu_hoTro.add(menu_rutDangKiHP);
 
         jMenuBar1.add(menu_hoTro);
 
         menu_thoat.setText("Thoát");
 
-        menu_dangXuat.setText("Dang xuat");
+        menu_dangXuat.setText("Đăng xuất");
         menu_dangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_dangXuatActionPerformed(evt);
@@ -146,7 +210,7 @@ public class MeNuSinhVien extends javax.swing.JFrame {
         });
         menu_thoat.add(menu_dangXuat);
 
-        menu_Thoat.setText("Thoat");
+        menu_Thoat.setText("Thoát");
         menu_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_ThoatActionPerformed(evt);
@@ -166,12 +230,59 @@ public class MeNuSinhVien extends javax.swing.JFrame {
                 .addContainerGap(243, Short.MAX_VALUE)
                 .addComponent(lb_xinChao)
                 .addGap(242, 242, 242))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_home_mSV, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_home_ngaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_home_tenSV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_home_maSV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_home_heDaoTao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbb_home_gioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_home_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lb_xinChao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_home_mSV)
+                    .addComponent(txt_home_maSV, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_home_tenSV, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_home_ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(cbb_home_gioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_home_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_home_heDaoTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,6 +313,23 @@ public class MeNuSinhVien extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_menu_ThoatActionPerformed
+
+    private void txt_home_diaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_home_diaChiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_home_diaChiActionPerformed
+
+    private void txt_home_tenSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_home_tenSVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_home_tenSVActionPerformed
+
+    private void txt_home_maSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_home_maSVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_home_maSVActionPerformed
+
+    private void menu_trangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_trangChuActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menu_trangChuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,7 +367,14 @@ public class MeNuSinhVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbb_home_gioiTinh;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel lb_home_mSV;
     private javax.swing.JLabel lb_xinChao;
     private javax.swing.JMenuItem menu_Thoat;
     private javax.swing.JMenuItem menu_dangKiHP;
@@ -251,5 +386,10 @@ public class MeNuSinhVien extends javax.swing.JFrame {
     private javax.swing.JMenu menu_trangChu;
     private javax.swing.JMenu menu_xem;
     private javax.swing.JMenuItem menu_xemTKB;
+    private javax.swing.JTextField txt_home_diaChi;
+    private javax.swing.JTextField txt_home_heDaoTao;
+    private javax.swing.JTextField txt_home_maSV;
+    private javax.swing.JTextField txt_home_ngaySinh;
+    private javax.swing.JTextField txt_home_tenSV;
     // End of variables declaration//GEN-END:variables
 }

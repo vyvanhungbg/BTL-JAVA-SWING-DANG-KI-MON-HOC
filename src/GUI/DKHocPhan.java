@@ -35,75 +35,92 @@ public class DKHocPhan extends javax.swing.JFrame {
     DangKy dk= new DangKy();
     static DBEngine DBE=new DBEngine();
     
-    void loadfieLHP(){
+    public void checkLogin(){
+        if(maSV==null){
+            JOptionPane.showMessageDialog(this,"Bạn cần đăng nhập để thực hiện chức năng này");
+            dispose(); // close window
+            setVisible(false);
+            System.exit(0); // stop program
+        }
+    }
+    
+    void loadFileLHP(){
         try {
            dsLhp=(ArrayList<LopHocPhan>) DBE.docFile(filelhp);
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(this,ex);
         }
     }
-    void loadfieHP(){
+    
+    
+    
+    void loadFileHP(){
         try {
            dshp=(ArrayList<HocPhan>) DBE.docFile(filehp);
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(this,ex);
         }
     }
-    void loadfieGV(){
+    void loadFileGV(){
         try {
            dsGv=(ArrayList<GiangVien>) DBE.docFile(fileGV);
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(this,ex);
         }
     }
-    void loadfiedk(){
+    void loadFiledk(){
         try {
            dsdk=(ArrayList<DangKy>) DBE.docFile(fileDK);
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(this,ex);
         }
     }
-    void nhapfile(){
+    void luuFileDSDK(){
         try {
             DBE.LuuFile(fileDK, dsdk);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,ex);
         }
     }
-    void loadtb(){
+    void loadTable(){
         jTable1.setModel(new DKHocPhanDAO(dsLhp,dshp,dsGv));
     }
-    boolean KTdk(String mahp){
-        boolean kq=true;
+    boolean kiemTraDangKy(String mahp){
         for(var it:dsdk){
-            if(mahp.equals(it.getMaHocPhan()) && it.getMaSinhVien().equalsIgnoreCase(maSV)){
-                kq=false;
+            
+            if(it.getMaHocPhan()!= null && it.getMaSinhVien()!= null && mahp.equalsIgnoreCase(it.getMaHocPhan()) && it.getMaSinhVien().equalsIgnoreCase(maSV)){
+                return false;
             }
         }
-        return kq;
+        return true;
     }
     /**
      * Creates new form DKHocPhan
      */
     public DKHocPhan() {
         initComponents();
-        loadfieGV();
-        loadfieHP();
-        loadfiedk();
-        loadfieLHP();
-        loadtb();
+        checkLogin();
+        loadFileGV();
+        loadFileHP();
+        loadFiledk();
+        loadFileLHP();
+        loadTable();
+       
         this.setLocationRelativeTo(null) ;
+        
+        
         
     }
     
      public DKHocPhan(String maSV) {
         this.maSV = maSV;
         initComponents();
-        loadfieGV();
-        loadfieHP();
-        loadfiedk();
-        loadfieLHP();
-        loadtb();
+        checkLogin();
+        loadFileGV();
+        loadFileHP();
+        loadFiledk();
+        loadFileLHP();
+        loadTable();
         this.setLocationRelativeTo(null) ;
         
     }
@@ -120,11 +137,11 @@ public class DKHocPhan extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButtonDK = new javax.swing.JButton();
-        jButtonTK = new javax.swing.JButton();
+        btn_dangKyHoc = new javax.swing.JButton();
+        btn_timKiem = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextTK = new javax.swing.JTextField();
-        jButtonLM = new javax.swing.JButton();
+        txt_timKiem = new javax.swing.JTextField();
+        btn_LamMoi = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_trangChu = new javax.swing.JMenu();
         menu_xem = new javax.swing.JMenu();
@@ -155,36 +172,46 @@ public class DKHocPhan extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButtonDK.setText("Đăng Ký Học");
-        jButtonDK.addActionListener(new java.awt.event.ActionListener() {
+        btn_dangKyHoc.setText("Đăng Ký Học");
+        btn_dangKyHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDKActionPerformed(evt);
+                btn_dangKyHocActionPerformed(evt);
             }
         });
 
-        jButtonTK.setText("Tìm Kiếm");
-        jButtonTK.addActionListener(new java.awt.event.ActionListener() {
+        btn_timKiem.setText("Tìm Kiếm");
+        btn_timKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTKActionPerformed(evt);
+                btn_timKiemActionPerformed(evt);
             }
         });
 
         jLabel2.setText(" TÌm Kiếm Theo Tên Học Phần");
 
-        jButtonLM.setText("Làm Mới");
-        jButtonLM.addActionListener(new java.awt.event.ActionListener() {
+        btn_LamMoi.setText("Làm Mới");
+        btn_LamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLMActionPerformed(evt);
+                btn_LamMoiActionPerformed(evt);
             }
         });
 
-        menu_trangChu.setText("Trang chu");
+        menu_trangChu.setText("Trang chủ");
+        menu_trangChu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menu_trangChuMouseClicked(evt);
+            }
+        });
+        menu_trangChu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_trangChuActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(menu_trangChu);
 
         menu_xem.setText("Xem");
         menu_xem.setToolTipText("");
 
-        menu_xemTKB.setText("Xem thoi khoa bieu");
+        menu_xemTKB.setText("Thời khóa biểu");
         menu_xemTKB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_xemTKBActionPerformed(evt);
@@ -197,7 +224,7 @@ public class DKHocPhan extends javax.swing.JFrame {
         menu_dangKy.setText("Đăng kí");
         menu_dangKy.setActionCommand("");
 
-        menu_dangKiHP.setText("Dang ki hoc phan");
+        menu_dangKiHP.setText("Đăng kí học phần");
         menu_dangKiHP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_dangKiHPActionPerformed(evt);
@@ -207,16 +234,16 @@ public class DKHocPhan extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_dangKy);
 
-        menu_hoTro.setText("Ho tro");
+        menu_hoTro.setText("Hỗ trợ");
 
-        menu_rutDangKiHP.setText("Rut dang ki hoc phan");
+        menu_rutDangKiHP.setText("Rút đăng kí học phần");
         menu_hoTro.add(menu_rutDangKiHP);
 
         jMenuBar1.add(menu_hoTro);
 
         menu_thoat.setText("Thoát");
 
-        menu_dangXuat.setText("Dang xuat");
+        menu_dangXuat.setText("Đăng xuất");
         menu_dangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_dangXuatActionPerformed(evt);
@@ -224,7 +251,7 @@ public class DKHocPhan extends javax.swing.JFrame {
         });
         menu_thoat.add(menu_dangXuat);
 
-        menu_Thoat.setText("Thoat");
+        menu_Thoat.setText("Thoát");
         menu_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menu_ThoatActionPerformed(evt);
@@ -241,24 +268,25 @@ public class DKHocPhan extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonDK)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButtonLM)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextTK, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonTK))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(327, 327, 327))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_dangKyHoc)
+                                .addGap(30, 30, 30)
+                                .addComponent(btn_LamMoi)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_timKiem))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(327, 327, 327))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,23 +299,23 @@ public class DKHocPhan extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDK)
-                    .addComponent(jButtonTK)
-                    .addComponent(jTextTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLM))
+                    .addComponent(btn_dangKyHoc)
+                    .addComponent(btn_timKiem)
+                    .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_LamMoi))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTKActionPerformed
+    private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemActionPerformed
         // TODO add your handling code here:
-        String tenlop=jTextTK.getText().trim().toUpperCase();
+        String tenlop=txt_timKiem.getText().trim().toUpperCase();
         ArrayList<LopHocPhan> dsTK= new ArrayList<>();
-        for(var it:dshp){
+        for(HocPhan it:dshp){
             if(it.getTenHocPhan().trim().toUpperCase().contains(tenlop)){
-                for(var itL :dsLhp){
+                for(LopHocPhan itL :dsLhp){
                     if(it.getMaHocPhan().equals(itL.getMaHocPhan())){
                         dsTK.add(itL);
                     }
@@ -296,15 +324,15 @@ public class DKHocPhan extends javax.swing.JFrame {
         }
         
         jTable1.setModel(new DKHocPhanDAO(dsTK, dshp, dsGv));
-    }//GEN-LAST:event_jButtonTKActionPerformed
+    }//GEN-LAST:event_btn_timKiemActionPerformed
 
-    private void jButtonLMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLMActionPerformed
+    private void btn_LamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LamMoiActionPerformed
         // TODO add your handling code here:
-        jTextTK.setText("");
-        loadtb();
-    }//GEN-LAST:event_jButtonLMActionPerformed
+        txt_timKiem.setText("");
+        loadTable();
+    }//GEN-LAST:event_btn_LamMoiActionPerformed
 
-    private void jButtonDKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDKActionPerformed
+    private void btn_dangKyHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangKyHocActionPerformed
         // TODO add your handling code here:
         dong= jTable1.getSelectedRow();
         if(dong!=-1){
@@ -315,11 +343,11 @@ public class DKHocPhan extends javax.swing.JFrame {
                     mahp=it.getMaHocPhan();
                 }
             }
-            if(KTdk(mahp)){
+            if(kiemTraDangKy(mahp)){
                 try {
                     dk=new DangKy(maSV,malhp,mahp);
                     dsdk.add(dk);
-                    nhapfile();
+                    luuFileDSDK();
                     JOptionPane.showMessageDialog(this,"Bạn Đã Đang Ký Thành Công Lớp "  +malhp);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,e);
@@ -333,7 +361,11 @@ public class DKHocPhan extends javax.swing.JFrame {
             
         }
             
-    }//GEN-LAST:event_jButtonDKActionPerformed
+    }//GEN-LAST:event_btn_dangKyHocActionPerformed
+
+    private void menu_trangChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_trangChuActionPerformed
+        
+    }//GEN-LAST:event_menu_trangChuActionPerformed
 
     private void menu_xemTKBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_xemTKBActionPerformed
         // TODO add your handling code here:
@@ -360,6 +392,15 @@ public class DKHocPhan extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_menu_ThoatActionPerformed
+
+    private void menu_trangChuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_trangChuMouseClicked
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+             MeNuSinhVien menusv=new MeNuSinhVien(maSV);
+            //menusv.setMaSV();
+            menusv.setVisible(true);
+            dispose();
+    }//GEN-LAST:event_menu_trangChuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -394,18 +435,19 @@ public class DKHocPhan extends javax.swing.JFrame {
                 new DKHocPhan().setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonDK;
-    private javax.swing.JButton jButtonLM;
-    private javax.swing.JButton jButtonTK;
+    private javax.swing.JButton btn_LamMoi;
+    private javax.swing.JButton btn_dangKyHoc;
+    private javax.swing.JButton btn_timKiem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextTK;
     private javax.swing.JMenuItem menu_Thoat;
     private javax.swing.JMenuItem menu_dangKiHP;
     private javax.swing.JMenu menu_dangKy;
@@ -416,5 +458,6 @@ public class DKHocPhan extends javax.swing.JFrame {
     private javax.swing.JMenu menu_trangChu;
     private javax.swing.JMenu menu_xem;
     private javax.swing.JMenuItem menu_xemTKB;
+    private javax.swing.JTextField txt_timKiem;
     // End of variables declaration//GEN-END:variables
 }
